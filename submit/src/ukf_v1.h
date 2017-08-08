@@ -28,10 +28,6 @@ public:
   ///* state covariance matrix
   MatrixXd P_;
 
-  //noise covariance matrix
-  MatrixXd _radar_R_;
-  MatrixXd _lidar_R_;
-
   ///* predicted sigma points matrix
   MatrixXd xsig_aug_;
   MatrixXd xsig_pred_;
@@ -112,11 +108,6 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
-
-  inline void NormalizeAngle(double& phi)
-  {
-    phi = atan2(sin(phi), cos(phi));
-  }
 };
 
 #endif /* UKF_H */
