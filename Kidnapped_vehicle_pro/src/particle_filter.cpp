@@ -41,8 +41,17 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
     double theta_pred;
 
     theta_pred = p.theta + yaw_rate*delta_t;
-    x_pred = p.x + velocity/yaw_rate*(sin(theta_pred)-sin(p.theta));
-    y_pred = p.y - velocity/yaw_rate*(cos(theta_pred)-cos(p.theta));
+    if(yaw_rate != 0)
+    {
+        x_pred = p.x + velocity/(yaw_rate) * (sin(theta_pred)-sin(p.theta));
+        y_pred = p.y - velocity/(yaw_rate) * (cos(theta_pred)-cos(p.theta));
+    }
+    else
+    {
+        x_pred = p.x + velocity*cos(p.theta) * delta_t;
+        y_pred = p.y + velocity*sin(p.theta) * delta_t;
+    }
+    
 
     std::normal_distribution<double> dist_x(x_pred,std_pos[0]);
     std::normal_distribution<double> dist_y(y_pred,std_pos[1]);
