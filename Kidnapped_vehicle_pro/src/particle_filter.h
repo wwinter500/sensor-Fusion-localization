@@ -10,6 +10,10 @@ struct Particle {
 	double y;
 	double theta;
 	double weight;
+
+	std::vector<int> associations;
+	std::vector<double> sense_x;
+	std::vector<double> sense_y;
 };
 
 
@@ -19,13 +23,12 @@ class ParticleFilter {
 	// Number of particles to draw
 	int num_particles; 
 	
-	
-	
 	// Flag, if filter is initialized
 	bool is_initialized;
 	
 	// Vector of weights of all particles
 	std::vector<double> weights;
+
 	
 public:
 	
@@ -38,6 +41,10 @@ public:
 
 	// Destructor
 	~ParticleFilter() {}
+
+	std::string getAssociations(Particle best);
+	std::string getSenseX(Particle best);
+	std::string getSenseY(Particle best);
 
 	/**
 	 * init Initializes particle filter by initializing particles to Gaussian
